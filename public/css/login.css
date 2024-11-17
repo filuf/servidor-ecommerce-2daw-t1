@@ -1,0 +1,73 @@
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: aquamarine;
+    letter-spacing: 5px;
+}
+body {
+    background: url(https://img.freepik.com/vector-gratis/fondo-conexion-red-degradado_23-2148881320.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+div#container {
+    border: 2px solid;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+    padding-bottom: 8%;
+    margin-left: 25%;
+    margin-right: 25%;
+    background: rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-bottom: 20px;
+}
+div#error {
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+div label {
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: inline-block;
+    margin: 10px;
+    color: aquamarine;
+}
+div input[type="text"], div input[type="password"] {
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 100, 0, 0.2);
+    border-color: skyblue;
+    transition: all 0.3s;
+    color: aqua;
+}
+div input[type="text"]:hover, div input[type="text"]:focus, div input[type="password"]:hover, div input[type="password"]:focus {
+    border-color: blueviolet;
+}
+h3 {
+    text-align: center;
+    text-decoration: underline;
+    color: gray;
+}
+
+input[type="submit"] {
+    margin-top: 50px;
+    background-color: aqua;
+    color: gray;             
+    padding: 10px 20px;        
+    border: none;              
+    border-radius: 5px;        
+    cursor: pointer;           
+    font-size: 16px;           
+    transition: background-color 0.3s;
+    width: 183px;
+    font-weight: bold;
+}
+input[type="submit"]:hover {
+    background-color: blueviolet;
+    color: aqua;
+}
