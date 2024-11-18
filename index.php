@@ -8,7 +8,22 @@ define("PATH_XSD", "./config/xml/configuracion_db_schema.xsd");
 define("PATH_DASHBOARD", "./public/html_php/dashboard.php");
 
 if (validate_user(PATH_XML, PATH_XSD)) {
-    header("Location: " . PATH_DASHBOARD);
+    //guardamos el id de la empresa en sesión
+    $db = Connection_db::get_conexion(PATH_XML,PATH_XSD);
+    session_start();
+    $prepare = $db->prepare("
+    SELECT `id_empresa` FROM `t_credenciales_empresa` WHERE `correo_electronico` = :mail
+    ");
+    $prepare->bindParam("mail", $_COOKIE["user"]);
+    $prepare->execute();
+    $first_row = $prepare->fetch(PDO::FETCH_NUM);
+    if ($first_row) {
+        $_SESSION["id_empresa"] = $first_row[0];
+        header("Location: " . PATH_DASHBOARD);
+    } else {
+        echo "Hubo un problema al iniciar sesión.";
+    }
+
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
