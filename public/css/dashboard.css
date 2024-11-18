@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body, html {
     padding: 0%;
     margin: 0%;
@@ -27,4 +31,57 @@ a {
 }
 a:hover {
     color: blueviolet;
+}
+
+main {
+    box-sizing: border-box;
+    margin: 40px auto;
+    border: solid 1px green; /*Eliminar*/
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+aside {
+    text-align: center;
+    margin: 20px;
+    border: 1px solid black;
+    padding: 20px;
+    background-color: paleturquoise;
+    border-radius: 10px;
+    height: 160px;
+    max-height: 160px;
+}
+input[type="submit"] {
+    margin-top: 20px;
+    background-color: rgb(219, 238, 238);
+    color: rgb(0, 0, 0);             
+    padding: 10px 20px;        
+    border: none;              
+    border-radius: 5px;        
+    cursor: pointer;           
+    font-size: 16px;           
+    transition: background-color 0.3s;
+    width: 80%;
+    font-weight: bold;
+}
+input[type="submit"]:hover {
+    background-color: #ffe1f4;
+    color: rgb(40, 51, 194);
+}
+div.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+div.card {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    max-height: 400px;
+    max-width: 300px;
 }
