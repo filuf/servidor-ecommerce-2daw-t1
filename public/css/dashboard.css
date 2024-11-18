@@ -34,6 +34,9 @@ a:hover {
 }
 
 main {
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgb(236, 236, 228) 49%, rgba(255,255,255,1) 100%);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
     box-sizing: border-box;
     margin: 40px auto;
     border: solid 1px green; /*Eliminar*/
@@ -49,10 +52,12 @@ aside {
     padding: 20px;
     background-color: paleturquoise;
     border-radius: 10px;
+    width: 240px;
+    max-width: 240px;
     height: 160px;
     max-height: 160px;
 }
-input[type="submit"] {
+input[type="submit"].filtro {
     margin-top: 20px;
     background-color: rgb(219, 238, 238);
     color: rgb(0, 0, 0);             
@@ -62,10 +67,10 @@ input[type="submit"] {
     cursor: pointer;           
     font-size: 16px;           
     transition: background-color 0.3s;
-    width: 80%;
+    width: 75%;
     font-weight: bold;
 }
-input[type="submit"]:hover {
+input[type="submit"].filtro:hover {
     background-color: #ffe1f4;
     color: rgb(40, 51, 194);
 }
@@ -78,10 +83,13 @@ div.content {
     gap: 20px;
 }
 div.card {
+    background-color: white;
     margin: 20px;
     padding: 20px;
     border: 1px solid black;
     border-radius: 10px;
-    max-height: 400px;
+
+    max-height: 600px;
+    width: 300px;
     max-width: 300px;
 }

@@ -1,11 +1,11 @@
 <?php
 
-require_once "./config/singleton_db_sesion.php";
-require_once "./src/validate_user";
+require_once "./config/Singleton_db_sesion.php";
+require_once "./src/validate_user.php";
 
 define("PATH_XML", "./config/xml/configuracion_db.xml");
 define("PATH_XSD", "./config/xml/configuracion_db_schema.xsd");
-define("PATH_DASHBOARD", "./public/html_php/dashboard.html");
+define("PATH_DASHBOARD", "./public/html_php/dashboard.php");
 
 if (validate_user(PATH_XML, PATH_XSD)) {
     header("Location: " . PATH_DASHBOARD);
