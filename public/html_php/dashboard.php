@@ -92,7 +92,7 @@ try {
                             echo '<form action="./aniadir_carrito.php" method="post">';
                                 echo '<label for="cantidad">Cantidad:</label> ';
                                 echo '<input type="hidden" name="codigo_producto" value="' . $codigo . '">'; 
-                                echo '<input type="number" name="cantidad" min="1" max=" default="1"' . $stock . '"><br>';
+                                echo '<input type="number" name="cantidad" min="1" max="' . $stock . '"><br>';
                                 echo '<input type="submit" value="añadir">';
                             echo '</form>';
                             
