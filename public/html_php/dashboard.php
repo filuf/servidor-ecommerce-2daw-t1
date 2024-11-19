@@ -1,5 +1,9 @@
 <?php
-/*Mostrar error de autenticación en el index cuando no existan las credenciales*/
+/*
+Mostrar error de autenticación en el index cuando no existan las credenciales
+Cerrar sesión
+*/
+
 
 
 define("PATH_XML", "../../config/xml/configuracion_db.xml");
@@ -10,7 +14,7 @@ require_once "../../src/validate_user.php";
 
 //comprueba que el id empresa de la sesión y las cookies de sesión estén activas y sean correctas
 session_start();
-if (!validate_user(PATH_XML, PATH_XSD) && isset($_SESSION["id_empresa"])) {
+if (!validate_user(PATH_XML, PATH_XSD) || !isset($_SESSION["id_empresa"])) {
     header("Location: ../../index.php");
 }
 
@@ -21,14 +25,14 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["category"] != 0) { // si se selecciona un filtrado
 
         $prepare = $db->prepare("
-            SELECT `nombre_producto`, `descripcion_producto`, `peso_kg_producto`, `dimensiones_producto`, `stock_producto`, `imagen_producto`, `codigo_producto`
+            SELECT `nombre_producto`, `descripcion_producto`, `peso_kg_producto`, `dimensiones_producto`, `stock_producto`, `imagen_producto`, `codigo_producto`, `precio_producto`
             FROM t_productos
             WHERE codigo_categoria = :categoria
         ");
         $prepare->bindParam("categoria", $_POST["category"]);
     } else {
         $prepare = $db->prepare("
-        SELECT `nombre_producto`, `descripcion_producto`, `peso_kg_producto`, `dimensiones_producto`, `stock_producto`, `imagen_producto`, `codigo_producto` 
+        SELECT `nombre_producto`, `descripcion_producto`, `peso_kg_producto`, `dimensiones_producto`, `stock_producto`, `imagen_producto`, `codigo_producto`, `precio_producto`
         FROM t_productos
         ");
     }
@@ -41,6 +45,7 @@ try {
         $prepare->bindColumn(5, $stock);
         $prepare->bindColumn(6, $imagen);
         $prepare->bindColumn(7, $codigo);
+        $prepare->bindColumn(8, $precio);
     }
 } catch (PDOException $_exc) {
     echo "Ha habido un error al cargar los productos";
@@ -61,7 +66,9 @@ try {
 <body>
     <nav>
         <a href="./dashboard.php"><img class="logo" src="../resources/logo.png" alt="Logo" width="160px" height="50px"></a>
-        <a href="./pedidos.html">Pedidos</a>
+        <a href="./orders.html">Pedidos</a>
+        <a href="./shopping_cart.php">Carrito</a>
+        <a href="./logout.php">Cerrar Sesión</a>
     </nav>
     <main>
         <aside>
@@ -87,10 +94,11 @@ try {
                         echo '<p>' . "peso: " . $peso . 'kg</p>';
                         if ($stock > 0) {
                             echo '<p>' . "solo quedan " . $stock . ' artículos en stock</p>';
+                            echo '<p>' . "precio: " . $precio . '€</p>';
                             echo '<form action="../../src/add_product_shopping_cart.php" method="post">'; //formulario para añadir al carrito
                                 echo '<label for="cantidad">Cantidad:</label> ';
                                 echo '<input type="hidden" name="codigo_producto" value="' . $codigo . '">'; //codigo de producto
-                                echo '<input type="number" name="cantidad_producto" min="1" max="' . $stock . '"><br>'; //numero de artículos
+                                echo '<input type="number" name="cantidad_producto" value="1" min="1" max="' . $stock . '"><br>'; //numero de artículos
                                 echo '<input type="submit" value="añadir">';
                             echo '</form>';
                         } else {
