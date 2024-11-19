@@ -1,10 +1,10 @@
 <?php
 
-define("PATH_XML", "../config/xml/configuracion_db.xml");
-define("PATH_XSD", "../config/xml/configuracion_db_schema.xsd");
+define("PATH_XML", "../../config/xml/configuracion_db.xml");
+define("PATH_XSD", "../../config/xml/configuracion_db_schema.xsd");
 
-require_once "../config/Singleton_db_sesion.php";
-require_once "./get_shopping_cart_code.php";
+require_once "../../config/Singleton_db_sesion.php";
+require_once "../functions/get_shopping_cart_code.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     session_start(); //reanudamos la sesión
