@@ -7,10 +7,11 @@ define("PATH_XML", "./config/xml/configuracion_db.xml");
 define("PATH_XSD", "./config/xml/configuracion_db_schema.xsd");
 define("PATH_DASHBOARD", "./public/html_php/dashboard.php");
 
+session_start();
+
 if (validate_user(PATH_XML, PATH_XSD)) {
     //guardamos el id de la empresa en sesión
     $db = Connection_db::get_conexion(PATH_XML,PATH_XSD);
-    session_start();
     $prepare = $db->prepare("
     SELECT `id_empresa` FROM `t_credenciales_empresa` WHERE `correo_electronico` = :mail
     ");
@@ -18,19 +19,21 @@ if (validate_user(PATH_XML, PATH_XSD)) {
     $prepare->execute();
     $first_row = $prepare->fetch(PDO::FETCH_NUM);
     if ($first_row) {
+        $_SESSION["login_attemp_error"] = false;
         $_SESSION["id_empresa"] = $first_row[0];
         header("Location: " . PATH_DASHBOARD);
     } else {
         echo "Hubo un problema al iniciar sesión.";
     }
-
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["user"]) && isset($_POST["pass"])) {
+        $_SESSION["login_attemp_error"] = true;
         //establece las cookies user y pass con una duración de una semana
-        setcookie("user", $_POST["user"], time() + (3600 * 24 * 7), "", "", false, true);
-        setcookie("pass", $_POST["pass"], time() + (3600 * 24 * 7), "", "", false, true);
+        setcookie("user", $_POST["user"], time() + (3600 * 24 * 7), "/", "", false, true);
+        setcookie("pass", $_POST["pass"], time() + (3600 * 24 * 7), "/", "", false, true);
         //la página necesita ser recargada antes de usar las cookies
         header("Location: ./index.php"); 
     }
@@ -61,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div id="error">
                 <h2 style="color: red;">
                     <?php 
-                        if (isset($err)) {
+                        if (isset($_SESSION["login_attemp_error"]) && $_SESSION["login_attemp_error"] == true) {
                             echo"El usuario o la contraseña no son correctos";
                         }
                     ?>
