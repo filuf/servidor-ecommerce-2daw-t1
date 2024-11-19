@@ -10,6 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     add_product_shopping_cart();
 }
 
+/**
+ * Añade un nuevo producto al pedido almacenado en $POST.
+ * Si el producto ya existe en el carrito, actualiza la cantidad sumando la nueva cantidad al elemento.
+ * 
+ */
 function add_product_shopping_cart() {
     try {
         $cart_code = get_shopping_cart_code();
@@ -48,6 +53,10 @@ function add_product_shopping_cart() {
     }
 }
 
+/**
+ * Obtiene el código del carrito activo del usuario o crea uno en caso de no tener uno activo
+ * 
+ */
 function get_shopping_cart_code () {
     try {
         $db = Connection_db::get_conexion(PATH_XML, PATH_XSD);
