@@ -21,9 +21,8 @@ if (!validate_user(PATH_XML, PATH_XSD) || !isset($_SESSION["id_empresa"])) {
 //prepara la consulta para mostrar los items de la base de datos en función a un filtrado
 try {
     $db = Connection_db::get_conexion(PATH_XML, PATH_XSD);
-
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["category"] != 0) { // si se selecciona un filtrado
-
         $prepare = $db->prepare("
             SELECT `nombre_producto`, `descripcion_producto`, `peso_kg_producto`, `dimensiones_producto`, `stock_producto`, `imagen_producto`, `codigo_producto`, `precio_producto`
             FROM t_productos
@@ -36,6 +35,7 @@ try {
         FROM t_productos
         ");
     }
+
     $result = $prepare->execute();
     if ($result) {
         $prepare->bindColumn(1, $nombre);

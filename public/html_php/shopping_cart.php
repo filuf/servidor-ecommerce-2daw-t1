@@ -5,7 +5,7 @@ define("PATH_XSD", "../../config/xml/configuracion_db_schema.xsd");
 
 require_once "../../config/Singleton_db_sesion.php";
 require_once "../../src/validate_user.php";
-require_once "../../src/add_product_shopping_cart.php";
+require_once "../../src/get_shopping_cart_code.php";
 
 //comprueba que el id empresa de la sesión y las cookies de sesión estén activas y sean correctas
 session_start();
@@ -15,7 +15,7 @@ if (!validate_user(PATH_XML, PATH_XSD) || !isset($_SESSION["id_empresa"])) {
 
 try {
     $db = Connection_db::get_conexion(PATH_XML, PATH_XSD);
-    $cart_code = get_shopping_cart_code();
+    $cart_code = get_shopping_cart_code(PATH_XML, PATH_XSD);
     $prepare = $db->prepare("
         SELECT t1.codigo_carrito, t1.codigo_producto, t1.cantidad_producto, t2.nombre_producto, t2.descripcion_producto, t2.stock_producto, t2.precio_producto
         FROM t_productos_pedidos t1
@@ -30,18 +30,6 @@ try {
     echo "Ha habido un error con la base de datos";
     echo $exc->getMessage();
 }
-
-
-
-//query a usar
-
-/*
-SELECT t1.codigo_carrito, t1.codigo_producto, t1.cantidad_producto, t2.nombre_producto, t2.descripcion_producto, t2.stock_producto, t2.precio_producto
-FROM t_productos_pedidos t1
-LEFT JOIN
-t_productos t2
-ON t1.codigo_producto = t2.codigo_producto
-*/
 
 
 ?>
