@@ -23,5 +23,5 @@ El repositorio incluye:
 
 ## 🛠️ Tecnologías Utilizadas
 
-- Lenguaje: PHP para el lado servidor y HTML5, CSS y JavaScript para el lado cliente.
+- Lenguaje: PHP para el lado servidor y HTML5 con CSS para el lado cliente.
 - Base de datos: MariaDB.
