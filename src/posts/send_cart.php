@@ -81,20 +81,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $prepare_products->bindColumn(5, $precio_producto);
         $prepare_products->bindColumn(6, $imagen_producto);
         
+        $precio_final = 0;
         $message = "<h1>Lista de productos encargados por " . $responsible_employee . "</h1><ul>";
         while ($prepare_products->fetch(PDO::FETCH_BOUND)) {
+            $precio_total = $precio_producto * $cantidad_producto;
             $message .= "<li>";
                 $message .= "Código del producto: " . $codigo_producto . "<br>";
-                $message .= "nombre: " . $nombre_producto . "<br>";
+                $message .= "Nombre: " . $nombre_producto . "<br>";
                 if (!empty($imagen_producto)) {
                     $message .= '<img src="data:image/jpeg;base64,' . base64_encode($imagen_producto) . '" alt="imagen producto" height="100px" width="100px"><br>';
                 }
-                $message .= "descripción: " . $descripcion_producto . "<br>";
-                $message .= "cantidad: " . $cantidad_producto . " unidades<br>";
-                $message .= "precio: " . $precio_producto . "€<br>";
+                $message .= "Descripción: " . $descripcion_producto . "<br>";
+                $message .= "Cantidad: " . $cantidad_producto . " unidades<br>";
+                $message .= "Precio unitario : " . number_format($precio_producto, 2) . "€<br>";
+                $message .= "Precio total: " . number_format($precio_total, 2) . "€<br><br>";
             $message .= "</li>";
+            $precio_final += $precio_total;
         }
         $message .= "</ul>";
+        $message .= "<p>Precio final: " . $precio_final . "€</p>";
         $message .= "<p>Código de carrito: " . $cart_code . "</p>";
 
         //envía mails al comprador y al departamento
