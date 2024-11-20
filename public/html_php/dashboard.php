@@ -10,7 +10,7 @@ define("PATH_XML", "../../config/xml/configuracion_db.xml");
 define("PATH_XSD", "../../config/xml/configuracion_db_schema.xsd");
 
 require_once "../../config/Singleton_db_sesion.php";
-require_once "../../src/validate_user.php";
+require_once "../../src/functions/validate_user.php";
 
 //comprueba que el id empresa de la sesión y las cookies de sesión estén activas y sean correctas
 session_start();
@@ -21,7 +21,7 @@ if (!validate_user(PATH_XML, PATH_XSD) || !isset($_SESSION["id_empresa"])) {
 //prepara la consulta para mostrar los items de la base de datos en función a un filtrado
 try {
     $db = Connection_db::get_conexion(PATH_XML, PATH_XSD);
-    
+
     if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["category"] != 0) { // si se selecciona un filtrado
         $prepare = $db->prepare("
             SELECT `nombre_producto`, `descripcion_producto`, `peso_kg_producto`, `dimensiones_producto`, `stock_producto`, `imagen_producto`, `codigo_producto`, `precio_producto`
@@ -96,7 +96,7 @@ try {
                         if ($stock > 0) {
                             echo '<p>' . "solo quedan " . $stock . ' artículos en stock</p>';
                             echo '<p>' . "precio: " . $precio . '€</p>';
-                            echo '<form action="../../src/add_product_shopping_cart.php" method="post">'; //formulario para añadir al carrito
+                            echo '<form action="../../src/posts/add_product_shopping_cart.php" method="post">'; //formulario para añadir al carrito
                                 echo '<label for="cantidad">Cantidad:</label> ';
                                 echo '<input type="hidden" name="codigo_producto" value="' . $codigo . '">'; //codigo de producto
                                 echo '<input type="number" name="cantidad_producto" value="1" min="1" max="' . $stock . '"><br>'; //numero de artículos
@@ -108,49 +108,6 @@ try {
                     echo '</div>';
                 }
             ?>
-
-            <div class="card">
-                <p>nombre producto</p>
-                <img src="" alt="una foto">
-                <p>descripcion .. .asd ahdoahdljahd lahldjal djadjadjla j d</p>
-                <p>dimensiones: 15cm x 434234cm</p>
-                <p>peso: 0.10kg</p>
-            </div>
-            <div class="card">
-                <p>nombre producto</p>
-                <img src="" alt="una foto">
-                <p>descripcion .. .asd ahdoahdljahd lahldjal djadjadjla j d</p>
-                <p>dimensiones: 15cm x 434234cm</p>
-                <p>peso: 0.10kg</p>
-            </div>
-            <div class="card">
-                <p>nombre producto</p>
-                <img src="" alt="una foto">
-                <p>descripcion .. .asd ahdoahdljahd lahldjal djadjadjla j d</p>
-                <p>dimensiones: 15cm x 434234cm</p>
-                <p>peso: 0.10kg</p>
-            </div>
-            <div class="card">
-                <p>nombre producto</p>
-                <img src="" alt="una foto">
-                <p>descripcion .. .asd ahdoahdljahd lahldjal djadjadjla j d</p>
-                <p>dimensiones: 15cm x 434234cm</p>
-                <p>peso: 0.10kg</p>
-            </div>
-                        <div class="card">
-                <p>nombre producto</p>
-                <img src="" alt="una foto">
-                <p>descripcion .. .asd ahdoahdljahd lahldjal djadjadjla j d</p>
-                <p>dimensiones: 15cm x 434234cm</p>
-                <p>peso: 0.10kg</p>
-            </div>
-            <div class="card">
-                <p>nombre producto</p>
-                <img src="" alt="una foto">
-                <p>descripcion .. .asd ahdoahdljahd lahldjal djadjadjla j d</p>
-                <p>dimensiones: 15cm x 434234cm</p>
-                <p>peso: 0.10kg</p>
-            </div>
 
         </div>
     </main>

@@ -47,7 +47,7 @@ function add_product_shopping_cart() {
             $prepare_insert->bindParam("cantidad_producto", $_POST["cantidad_producto"]);
             $prepare_insert->execute();
         }
-        header("Location: ../public/html_php/dashboard.php");
+        header("Location: ../../public/html_php/dashboard.php");
     } catch (PDOException $exc) {
         echo "[!] Ha habido un error de conexión en la base de datos<br>";
         echo $exc->getMessage();

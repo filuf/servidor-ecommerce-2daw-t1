@@ -1,0 +1,60 @@
+main {
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgb(236, 236, 228) 49%, rgba(255,255,255,1) 100%);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    box-sizing: border-box;
+    margin: 40px auto;
+    border: solid 1px green; /*Eliminar*/
+    width: 100%;
+    height: auto;
+    display: grid;
+}
+
+div.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+div.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    max-height: 600px;
+    width: 300px;
+    max-width: 300px;
+}
+
+div.send-order {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.send-order input[type="submit"] {
+    margin-top: 20px;
+    background-color: rgb(219, 238, 238);
+    color: rgb(0, 0, 0);             
+    padding: 10px 20px;        
+    border: none;              
+    border-radius: 5px;        
+    cursor: pointer;           
+    font-size: 16px;           
+    transition: background-color 0.3s;
+    width: 500px;
+    font-weight: bold;
+}
+div.send-order input[type="submit"]:hover {
+    background-color: #ffe1f4;
+    color: rgb(40, 51, 194);
+}

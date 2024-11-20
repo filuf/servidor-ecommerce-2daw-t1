@@ -1,7 +1,7 @@
 <?php
 
 require_once "./config/Singleton_db_sesion.php";
-require_once "./src/validate_user.php";
+require_once "./src/functions/validate_user.php";
 
 define("PATH_XML", "./config/xml/configuracion_db.xml");
 define("PATH_XSD", "./config/xml/configuracion_db_schema.xsd");
